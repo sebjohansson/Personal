@@ -21,7 +21,6 @@ Cargo.lock
 # Ignore .idea folders
 .idea/
 *.idea
-!/.gitignore
 
 # Default ignored files
 */shelf/
