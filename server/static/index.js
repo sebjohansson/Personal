@@ -1,15 +1,3 @@
-// function gridCellDimensions() {
-//   const element = document.createElement("div");
-//   element.style.position = "fixed";
-//   element.style.height = "var(--line-height)";
-//   element.style.width = "1ch";
-//   document.body.appendChild(element);
-//   const rect = element.getBoundingClientRect();
-//   document.body.removeChild(element);
-//   return { width: rect.width, height: rect.height };
-// }
-
-// Add padding to each media to maintain grid.
 function adjustMediaPadding() {
   const cell = gridCellDimensions();
 
@@ -22,7 +10,7 @@ function adjustMediaPadding() {
 
   function setFallbackHeight(media) {
     const rect = media.getBoundingClientRect();
-    const height = Math.round((rect.width / 2) / cell.height) * cell.height;
+    const height = Math.round(rect.width / 2 / cell.height) * cell.height;
     media.style.setProperty("height", `${height}px`);
   }
 
@@ -76,45 +64,3 @@ function adjustMediaPadding() {
     }
   }
 }
-
-// adjustMediaPadding();
-// window.addEventListener("load", adjustMediaPadding);
-// window.addEventListener("resize", adjustMediaPadding);
-
-// function checkOffsets() {
-//   const ignoredTagNames = new Set([
-//     "THEAD",
-//     "TBODY",
-//     "TFOOT",
-//     "TR",
-//     "TD",
-//     "TH",
-//   ]);
-//   const cell = gridCellDimensions();
-//   const elements = document.querySelectorAll("body :not(.debug-grid, .debug-toggle)");
-//   for (const element of elements) {
-//     if (ignoredTagNames.has(element.tagName)) {
-//       continue;
-//     }
-//     const rect = element.getBoundingClientRect();
-//     if (rect.width === 0 && rect.height === 0) {
-//       continue;
-//     }
-//     const top = rect.top + window.scrollY;
-//     const left = rect.left + window.scrollX;
-//     const offset = top % (cell.height / 2);
-//     if (offset > 0) {
-//       element.classList.add("off-grid");
-//       console.error("Incorrect vertical offset for", element, "with remainder", top % cell.height, "when expecting divisible by", cell.height / 2);
-//     } else {
-//       element.classList.remove("off-grid");
-//     }
-//   }
-// }
-
-// const debugToggle = document.querySelector(".debug-toggle");
-// function onDebugToggle() {
-//   document.body.classList.toggle("debug", debugToggle.checked);
-// }
-// debugToggle.addEventListener("change", onDebugToggle);
-// onDebugToggle();
