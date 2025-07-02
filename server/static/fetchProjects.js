@@ -1,18 +1,16 @@
-fetch("https://api.github.com/repos/sebjohansson/keybearer")
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data); // Prints result from `response.json()` in getRequest
-  })
-  .catch((error) => console.error(error));
-
-fetch("https://api.github.com/repos/sebjohansson/personal")
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data); // Prints result from `response.json()` in getRequest
-  })
-  .catch((error) => console.error(error));
-
 const GITHUB_USERNAME = "sebjohansson";
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const tables = document.querySelectorAll("table.header[data-repo]");
+
+  for (const table of tables) {
+    const repo = table.dataset.repo;
+    const details = await fetchRepoDetails(repo);
+    if (details) {
+      table.innerHTML = createProjectTable(details);
+    }
+  }
+});
 
 async function fetchRepoDetails(repo) {
   const repoUrl = `https://api.github.com/repos/${GITHUB_USERNAME}/${repo}`;
@@ -68,15 +66,3 @@ function createProjectTable(details) {
     </tr>
   `;
 }
-
-document.addEventListener("DOMContentLoaded", async () => {
-  const tables = document.querySelectorAll("table.header[data-repo]");
-
-  for (const table of tables) {
-    const repo = table.dataset.repo;
-    const details = await fetchRepoDetails(repo);
-    if (details) {
-      table.innerHTML = createProjectTable(details);
-    }
-  }
-});
